@@ -25,7 +25,7 @@
             </thead>
             <tbody>
                 <?php
-                include('config.php');
+                include('model/config.php');
                 $sql_classement = "SELECT utilisateurs.nom, utilisateurs.prenom, classement.points 
                                   FROM utilisateurs 
                                   JOIN classement ON utilisateurs.id = classement.utilisateur_id 
@@ -59,8 +59,8 @@
     </div>
 
     <div class="container">
-        <a href="inscription.php" class="button-link">S'inscrire</a>
-        <a href="connexion.php" class="button-link">Se connecter</a>
+        <a href="view/inscription.php" class="button-link">S'inscrire</a>
+        <a href="view/connexion.php" class="button-link">Se connecter</a>
     </div>
 </body>
 </html>

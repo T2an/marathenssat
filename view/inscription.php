@@ -2,14 +2,14 @@
 <html>
 <head>
     <title>Inscription</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="../styles.css">
 </head>
 <body>
     <h1 class="header">Inscription</h1>
 
     <div class="container">
         <!-- Formulaire d'inscription -->
-        <form action="traitement_inscription.php" method="post">
+        <form action="../controler/traitement_inscription.php" method="post">
             <label for="nom">Nom :</label>
             <input type="text" name="nom" required><br>
             <label for="prenom">Prénom :</label>
@@ -29,7 +29,7 @@
 
     <!-- Lien vers la page d'accueil -->
     <div class="container">
-        <a href="index.php">Retour à l'accueil</a>
+        <a href="../index.php">Retour à l'accueil</a>
     </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Sorties</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="../styles.css">
     <style>
         /* Utilisez du CSS pour afficher les éléments côte à côte */
         .container {
@@ -25,7 +25,7 @@
 
 <?php
 session_start();
-include('config.php');
+include('../model/config.php');
 
 // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
 if (!isset($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connecte']) {
@@ -98,7 +98,7 @@ function getColorForSortie($sortieId, $utilisateurId, $conn) {
 
     <div class="participation-container">
         <h3>Participer à une sortie</h3>
-        <form class="participation-form" action="traitement_participation.php" method="post">
+        <form class="participation-form" action="../controler/traitement_participation.php" method="post">
             <label for="code">Code de la sortie :</label>
             <input type="text" name="code" required>
             <input class=big-button type="submit" value="Participer">

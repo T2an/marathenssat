@@ -1,10 +1,10 @@
 <?php
 session_start();
-include('config.php');
+include('../model/config.php');
 
 // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
 if (!isset($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connecte']) {
-    header('Location: connexion.php');
+    header('Location: ../view/connexion.php');
     exit();
 }
 
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmtVerifParticipationExiste->num_rows > 0) {
             // L'utilisateur a déjà participé à cette sortie
             $_SESSION['message'] = "Vous avez déjà participé à cette sortie.";
-            header('Location: calcul_points.php'); // Rediriger vers la page des sorties
+            header('Location: ../controler/calcul_points.php'); // Rediriger vers la page des sorties
             exit();
         }
 
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errorMessage = "Erreur lors de la préparation de la requête de vérification de participation : " . $conn->error;
         $_SESSION['message'] = htmlspecialchars($errorMessage, ENT_QUOTES, 'UTF-8');
         echo $errorMessage;
-        header('Location: sorties.php'); // Rediriger vers la page des sorties
+        header('Location: ../view/sorties.php'); // Rediriger vers la page des sorties
         exit();
     }
 
@@ -67,24 +67,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if ($stmtInsert->execute()) {
                         // La participation a été enregistrée avec succès
                         $_SESSION['message'] = "La participation a été enregistrée avec succès";
-                        header('Location: calcul_points.php'); // Appel du script calcul_points.php
+                        header('Location: ../controler/calcul_points.php'); // Appel du script calcul_points.php
                         exit();
                     } else {
                         $_SESSION['message'] = "Erreur lors de l'insertion de la participation : " . htmlspecialchars($stmtInsert->error, ENT_QUOTES, 'UTF-8');
                         echo "Erreur lors de l'insertion de la participation : " . $stmtInsert->error;
-                        header('Location: sorties.php'); // Rediriger vers la page des sorties
+                        header('Location: ../view/sorties.php'); // Rediriger vers la page des sorties
                         exit();
                     }
                 } else {
                     $_SESSION['message'] = "Erreur lors de la préparation de la requête d'insertion : " . htmlspecialchars($conn->error, ENT_QUOTES, 'UTF-8');
                     echo "Erreur lors de la préparation de la requête d'insertion : " . $conn->error;
-                    header('Location: sorties.php'); // Rediriger vers la page des sorties
+                    header('Location: ../view/sorties.php'); // Rediriger vers la page des sorties
                     exit();
                 }
             }
         } else {  
             $_SESSION['message'] = "Code invalide";
-            header('Location: sorties.php'); // Rediriger vers la page des sorties
+            header('Location: ../view/sorties.php'); // Rediriger vers la page des sorties
             exit();
         }
 
@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conn->close();
 } else {
     // Si la page est accédée par une méthode GET (non soumise), redirigez l'utilisateur
-    header('Location: sorties.php');
+    header('Location: ../view/sorties.php');
     exit();
 }
 ?>

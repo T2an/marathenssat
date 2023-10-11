@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Connexion</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="../styles.css">
 </head>
 <body>
     <h1 class="header">Connexion</h1>
@@ -18,7 +18,7 @@
         }
         ?>
 
-        <form action="traitement_connexion.php" method="post">
+        <form action="../controler/traitement_connexion.php" method="post">
             <label for="email">Email :</label>
             <input type="email" name="email" required><br>
             <label for="mot_de_passe">Mot de passe :</label>
@@ -34,7 +34,7 @@
     </div>
     <!-- Lien vers la page d'accueil -->
     <div class="container">
-        <a href="index.php">Retour à l'accueil</a>
+        <a href="../index.php">Retour à l'accueil</a>
     </div>
 </body>
 </html>

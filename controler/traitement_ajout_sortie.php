@@ -1,10 +1,10 @@
 <?php
 session_start();
-include('config.php');
+include('../model/config.php');
 
 // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
 if (!isset($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connecte']) {
-    header('Location: connexion.php');
+    header('Location: ../view/connexion.php');
     exit();
 }
 
@@ -40,7 +40,7 @@ if (isset($_FILES['image'])) {
         $tempName = $file['tmp_name'];
 
         // Générez un nom unique pour le fichier
-        $fileName = 'images/' . uniqid() . '.png';
+        $fileName = '../images/' . uniqid() . '.png';
 
         // Déplacez le fichier temporaire vers le dossier "images"
         move_uploaded_file($tempName, $fileName);
@@ -58,7 +58,7 @@ if (isset($_FILES['image'])) {
             if ($stmt->execute()) {
                 // Sortie ajoutée avec succès, vous pouvez rediriger l'utilisateur ou afficher un message de réussite
                 $_SESSION['message'] = 'Succès de ajout';
-                header('Location: administration.php'); // Redirection vers la page d'administration
+                header('Location: ../view/administration.php'); // Redirection vers la page d'administration
                 exit();
             } else {
                 $_SESSION['message'] = 'Erreur lors de ajout de la sortie';
@@ -72,12 +72,12 @@ if (isset($_FILES['image'])) {
         }
     } else {
         $_SESSION['message'] = 'Erreur lors du téléchargement de l\'image : ' . $file['error'];
-        header('Location: administration.php'); // Redirection vers la page d'administration en cas d'erreur
+        header('Location: ../view/administration.php'); // Redirection vers la page d'administration en cas d'erreur
         exit();
     }
 } else {
     $_SESSION['message'] = 'Aucune image téléchargée.';
-    header('Location: administration.php'); // Redirection vers la page d'administration si aucune image n'a été téléchargée
+    header('Location: ../view/administration.php'); // Redirection vers la page d'administration si aucune image n'a été téléchargée
     exit();
 }
 

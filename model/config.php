@@ -1,6 +1,6 @@
 <?php
 // Chemin vers le fichier .env
-$envFilePath = __DIR__ . '/var.env';
+$envFilePath = '/var/www/monsite/var.env';
 
 // Vérifiez si le fichier .env existe
 if (file_exists($envFilePath)) {
@@ -28,7 +28,7 @@ if (file_exists($envFilePath)) {
         die("Le fichier .env ne contient pas toutes les variables nécessaires.");
     }
 } else {
-    die("Le fichier .env n'a pas été trouvé.");
+    die("Le fichier .env n'a pas été trouvé." . $envFilePath);
 }
 
 ?>

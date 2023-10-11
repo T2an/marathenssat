@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Administration</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="../styles.css">
 </head>
 <body>
 
@@ -15,7 +15,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connect
     exit();
 }
 
-include('config.php');
+include('../model/config.php');
 
 // Récupérez le nom et le prénom de l'utilisateur connecté à partir de la base de données
 $utilisateur_id = $_SESSION['utilisateur_id'];
@@ -54,7 +54,7 @@ if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {
 
 <div class="container2">
     <h3>Ajouter une sortie</h3>
-    <form action="traitement_ajout_sortie.php" method="post" enctype="multipart/form-data">
+    <form action="../controler/traitement_ajout_sortie.php" method="post" enctype="multipart/form-data">
         <label for="km">Kilomètres :</label>
         <input type="text" name="km" required><br>
         <label for="nom">Nom :</label>

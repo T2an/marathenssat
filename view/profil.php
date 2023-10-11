@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Profil</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="../styles.css">
 </head>
 <body>
 
@@ -15,7 +15,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connect
     exit();
 }
 
-include('config.php');
+include('../model/config.php');
 
 // Récupérez le nom et le prénom de l'utilisateur connecté à partir de la base de données en utilisant une requête préparée
 $utilisateur_id = $_SESSION['utilisateur_id'];
@@ -33,13 +33,10 @@ if ($stmt) {
     } else {
         // L'utilisateur n'a pas été trouvé, vous pouvez gérer cette situation
     }
-    
     // Fermez l'instruction préparée
     $stmt->close();
 }
-
 ?>
-
 <?php include('header.php'); ?>
 
 <div class="container2">

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('config.php');
+include('../model/config.php');
 
 $nom_utilisateur = $prenom_utilisateur = '';
 $administration_link = ''; // Initialisez la variable pour éviter les erreurs
@@ -58,6 +58,6 @@ if (isset($_SESSION['utilisateur_connecte']) && $_SESSION['utilisateur_connecte'
 
     <?php echo $administration_link ?? ''; // Affichez l'option "Administration" si elle existe ?>
     <div class="nav-box">
-        <a href="deconnexion.php">Se déconnecter</a>
+        <a href="../controler/deconnexion.php">Se déconnecter</a>
     </div>
 </div>

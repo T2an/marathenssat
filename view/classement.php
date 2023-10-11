@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Classement</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="../styles.css">
 </head>
 <body>
 
@@ -15,7 +15,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connect
     exit();
 }
 
-include('config.php');
+include('../model/config.php');
 
 // Exécutez une requête SQL pour obtenir les données de la table "classement"
 $sql_classement = "SELECT utilisateurs.nom, utilisateurs.prenom, classement.points FROM utilisateurs JOIN classement ON utilisateurs.id = classement.utilisateur_id ORDER BY classement.points DESC";

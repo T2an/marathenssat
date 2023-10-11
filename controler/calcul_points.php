@@ -1,10 +1,10 @@
 <?php
 session_start();
-include('config.php');
+include('../model/config.php');
 
 // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
 if (!isset($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connecte']) {
-    header('Location: connexion.php');
+    header('Location: ../view/connexion.php');
     exit();
 }
 
@@ -67,6 +67,6 @@ while ($row2 = $result_user->fetch_assoc()) {
 }
 
 // Redirigez l'utilisateur vers la page de classement
-header('Location: sorties.php');
+header('Location: ../view/sorties.php');
 exit();
 ?>

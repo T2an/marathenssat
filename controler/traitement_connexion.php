@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('config.php');
+include('../model/config.php');
 
 $email = htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8');
 $mot_de_passe = htmlspecialchars($_POST['mot_de_passe'], ENT_QUOTES, 'UTF-8');
@@ -20,18 +20,18 @@ if ($stmt) {
         if (password_verify($mot_de_passe, $mot_de_passe_hache)) {
             $_SESSION['utilisateur_connecte'] = true;
             $_SESSION['utilisateur_id'] = $utilisateur_id;
-            header('Location: classement.php');
+            header('Location: ../view/classement.php');
             exit();
         } else {
             // Mot de passe incorrect, stockez un message d'erreur dans une variable de session
             $_SESSION['message'] = 'Mot de passe incorrect.';
-            header('Location: connexion.php');
+            header('Location: ../view/connexion.php');
             exit();
         }
     } else {
         // L'utilisateur avec l'adresse email n'existe pas, stockez un message d'erreur dans une variable de session
         $_SESSION['message'] = "L'utilisateur avec l'adresse email '$email' n'existe pas.";
-        header('Location: connexion.php');
+        header('Location: ../view/connexion.php');
         exit();
     }
 
@@ -41,7 +41,7 @@ if ($stmt) {
     $errorMessage = "Erreur lors de la préparation de la requête de connexion : " . $conn->error;
     $_SESSION['message'] = htmlspecialchars($errorMessage, ENT_QUOTES, 'UTF-8');
     echo $errorMessage;
-    header('Location: connexion.php');
+    header('Location: ../view/connexion.php');
     exit();
 }
 
