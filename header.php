@@ -3,39 +3,55 @@ session_start();
 include('config.php');
 
 $nom_utilisateur = $prenom_utilisateur = '';
+$administration_link = ''; // Initialisez la variable pour éviter les erreurs
 
 if (isset($_SESSION['utilisateur_connecte']) && $_SESSION['utilisateur_connecte']) {
     $utilisateur_id = $_SESSION['utilisateur_id'];
 
-    // Récupérez le nom et le prénom de l'utilisateur connecté à partir de la base de données
-    $sql_nom_prenom = "SELECT nom, prenom FROM utilisateurs WHERE id = $utilisateur_id";
-    $result_nom_prenom = $conn->query($sql_nom_prenom);
+    // Utilisez des requêtes préparées pour éviter les injections SQL
+    $sql_nom_prenom = "SELECT nom, prenom FROM utilisateurs WHERE id = ?";
+    $stmt_nom_prenom = $conn->prepare($sql_nom_prenom);
 
-    if ($result_nom_prenom->num_rows == 1) {
-        $row_nom_prenom = $result_nom_prenom->fetch_assoc();
-        $nom_utilisateur = $row_nom_prenom['nom'];
-        $prenom_utilisateur = $row_nom_prenom['prenom'];
+    if ($stmt_nom_prenom) {
+        $stmt_nom_prenom->bind_param("i", $utilisateur_id);
+        $stmt_nom_prenom->execute();
+        $stmt_nom_prenom->store_result();
+
+        if ($stmt_nom_prenom->num_rows == 1) {
+            $stmt_nom_prenom->bind_result($nom_utilisateur, $prenom_utilisateur);
+            $stmt_nom_prenom->fetch();
+        }
+
+        // Fermez l'instruction préparée
+        $stmt_nom_prenom->close();
     }
 
-    // Vérifiez si l'utilisateur est administrateur
-    $sql_verif_admin = "SELECT id FROM administrateurs WHERE utilisateur_id = $utilisateur_id";
-    $result_verif_admin = $conn->query($sql_verif_admin);
+    // Utilisez également une requête préparée pour vérifier si l'utilisateur est administrateur
+    $sql_verif_admin = "SELECT id FROM administrateurs WHERE utilisateur_id = ?";
+    $stmt_verif_admin = $conn->prepare($sql_verif_admin);
 
-    if ($result_verif_admin->num_rows > 0) {
-        // Si l'utilisateur est administrateur, affichez l'option "Administration"
-        $administration_link = '<div class="nav-box"><a href="administration.php">Administration</a></div>';
+    if ($stmt_verif_admin) {
+        $stmt_verif_admin->bind_param("i", $utilisateur_id);
+        $stmt_verif_admin->execute();
+        $stmt_verif_admin->store_result();
+
+        if ($stmt_verif_admin->num_rows > 0) {
+            $administration_link = '<div class="nav-box"><a href="administration.php">Administration</a></div>';
+        }
+
+        // Fermez l'instruction préparée
+        $stmt_verif_admin->close();
     }
 }
 ?>
 
 <div class="header">
     <div class="nav-box">
-        <a href="profil.php"><?php echo $nom_utilisateur . " " . $prenom_utilisateur; ?></a>
+        <a href="profil.php"><?php echo htmlspecialchars($nom_utilisateur) . " " . htmlspecialchars($prenom_utilisateur); ?></a>
     </div>
     <div class="nav-box">
         <a href="classement.php">Classement</a>
     </div>
-
     <div class="nav-box">
         <a href="sorties.php">Sorties</a>
     </div>

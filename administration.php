@@ -18,13 +18,32 @@ if (!isset($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connect
 include('config.php');
 
 // Récupérez le nom et le prénom de l'utilisateur connecté à partir de la base de données
+$utilisateur_id = $_SESSION['utilisateur_id'];
 
+$sql_user_info = "SELECT nom, prenom FROM utilisateurs WHERE id = ?";
+$stmtUserInfo = $conn->prepare($sql_user_info);
+
+if ($stmtUserInfo) {
+    $stmtUserInfo->bind_param("i", $utilisateur_id);
+    $stmtUserInfo->execute();
+    $stmtUserInfo->store_result();
+
+    if ($stmtUserInfo->num_rows == 1) {
+        $stmtUserInfo->bind_result($nom_utilisateur, $prenom_utilisateur);
+        $stmtUserInfo->fetch();
+    }
+} else {
+    echo "Erreur lors de la préparation de la requête d'informations sur l'utilisateur : " . $conn->error;
+}
+
+$nom_utilisateur = htmlspecialchars($nom_utilisateur, ENT_QUOTES, 'UTF-8');
+$prenom_utilisateur = htmlspecialchars($prenom_utilisateur, ENT_QUOTES, 'UTF-8');
 ?>
 
 <?php include('header.php'); 
 
 if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {
-    echo '<p class="error-message">' . $_SESSION['message'] . '</p>';
+    echo '<p class="error-message">' . htmlspecialchars($_SESSION['message'], ENT_QUOTES, 'UTF-8') . '</p>';
     unset($_SESSION['message']); // Supprimez la variable de session après l'affichage
 }
 ?>
@@ -48,7 +67,6 @@ if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {
         <input type="submit" class="big-button" value="Ajouter">
     </form>
 </div>
-
 
 </body>
 </html>

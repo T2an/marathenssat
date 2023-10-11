@@ -10,7 +10,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connect
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupérez le code saisi depuis le formulaire
-    $codeSaisi = $_POST['code'];
+    $codeSaisi = htmlspecialchars($_POST['code'], ENT_QUOTES, 'UTF-8');
 
     // Récupérez l'ID de l'utilisateur connecté
     $utilisateur_id = $_SESSION['utilisateur_id'];
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmtVerifParticipationExiste->close();
     } else {
         $errorMessage = "Erreur lors de la préparation de la requête de vérification de participation : " . $conn->error;
-        $_SESSION['message'] = $errorMessage;
+        $_SESSION['message'] = htmlspecialchars($errorMessage, ENT_QUOTES, 'UTF-8');
         echo $errorMessage;
         header('Location: sorties.php'); // Rediriger vers la page des sorties
         exit();
@@ -70,14 +70,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         header('Location: calcul_points.php'); // Appel du script calcul_points.php
                         exit();
                     } else {
-                        $_SESSION['message'] = "Erreur lors de l'insertion de la participation : " . $stmtInsert->error;
+                        $_SESSION['message'] = "Erreur lors de l'insertion de la participation : " . htmlspecialchars($stmtInsert->error, ENT_QUOTES, 'UTF-8');
                         echo "Erreur lors de l'insertion de la participation : " . $stmtInsert->error;
                         header('Location: sorties.php'); // Rediriger vers la page des sorties
                         exit();
-
                     }
                 } else {
-                    $_SESSION['message'] = "Erreur lors de la préparation de la requête d'insertion : " . $conn->error;
+                    $_SESSION['message'] = "Erreur lors de la préparation de la requête d'insertion : " . htmlspecialchars($conn->error, ENT_QUOTES, 'UTF-8');
                     echo "Erreur lors de la préparation de la requête d'insertion : " . $conn->error;
                     header('Location: sorties.php'); // Rediriger vers la page des sorties
                     exit();
@@ -92,7 +91,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Fermez l'instruction préparée
         $stmt->close();
     } else {
-        echo "Erreur lors de la préparation de la requête : " . $conn->error;
+        $errorMessage = "Erreur lors de la préparation de la requête : " . $conn->error;
+        $_SESSION['message'] = htmlspecialchars($errorMessage, ENT_QUOTES, 'UTF-8');
+        echo $errorMessage;
     }
 
     // Fermez la connexion à la base de données

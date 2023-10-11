@@ -25,6 +25,7 @@
 
 <?php
 session_start();
+include('config.php');
 
 // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
 if (!isset($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connecte']) {
@@ -32,7 +33,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connect
     exit();
 }
 
-include('config.php');
+include('header.php');
 
 function getColorForSortie($sortieId, $utilisateurId, $conn) {
     // Vérifiez si le couple id utilisateur/id sortie existe dans la table participation
@@ -62,37 +63,27 @@ function getColorForSortie($sortieId, $utilisateurId, $conn) {
 
 ?>
 
-<?php include('header.php'); ?>
-
 <div class="container">
     <div class="sorties-container">
         <h2>Voici la liste des sorties : </h2>
 
         <?php
-        // Sélectionnez toutes les lignes de la table "sorties" triées par date décroissante
         $sql_select_sorties = "SELECT * FROM sorties ORDER BY date DESC";
         $result_sorties = $conn->query($sql_select_sorties);
 
         if ($result_sorties->num_rows > 0) {
-            echo '<table >';
-            // echo '<thead >';
-            // echo '<tr class="tab-sorties">';
-            // echo '<th>Kilomètres</th>';
-            // echo '<th>Nom</th>';
-            // echo '<th>Date</th>';
-            // echo '</tr>';
-            // echo '</thead>';
+            echo '<table>';
             echo '<tbody>';
 
             while ($row = $result_sorties->fetch_assoc()) {
                 // Obtenez la couleur en fonction de l'utilisateur et de la sortie
                 $color = getColorForSortie($row['id'], $_SESSION['utilisateur_id'], $conn);
-    
+
                 // Appliquez la couleur à la ligne
                 echo '<tr class="tab-sorties" style="background-color:' . $color . ';">';
-                echo '<td>' . $row['nom'] . '</td>';
-                echo '<td>' . $row['km'] . 'km' . '</td>';
-                echo '<td>' . $row['date'] . '</td>';
+                echo '<td>' . htmlspecialchars($row['nom'], ENT_QUOTES, 'UTF-8') . '</td>';
+                echo '<td>' . htmlspecialchars($row['km'], ENT_QUOTES, 'UTF-8') . 'km' . '</td>';
+                echo '<td>' . htmlspecialchars($row['date'], ENT_QUOTES, 'UTF-8') . '</td>';
                 echo '<td style="width:20%"><a href="image_detail.php?image=' . $row['image'] . '"><img style="width:100%" src="' . $row['image'] . '" alt="Parcours"></a></td>';
                 echo '</tr>';
             }
@@ -112,9 +103,8 @@ function getColorForSortie($sortieId, $utilisateurId, $conn) {
             <input type="text" name="code" required>
             <input class=big-button type="submit" value="Participer">
             <?php
-            session_start();
             if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {
-                echo '<p class="error-message">' . $_SESSION['message'] . '</p>';
+                echo '<p class="error-message">' . htmlspecialchars($_SESSION['message'], ENT_QUOTES, 'UTF-8') . '</p>';
                 unset($_SESSION['message']); // Supprimez la variable de session après l'affichage
             }
             ?>

@@ -44,7 +44,7 @@
     <div id="image-container">
         <?php
         if (isset($_GET['image'])) {
-            $imagePath = $_GET['image'];
+            $imagePath = htmlspecialchars($_GET['image']); // Échapper la valeur de l'URL
             echo '<img src="' . $imagePath . '" alt="Image en gros plan">';
         } else {
             echo 'Aucune image sélectionnée.';

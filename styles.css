@@ -1,3 +1,4 @@
+/* Réglages globaux */
 body {
     font-family: Arial, sans-serif;
     background-color: #222;
@@ -6,11 +7,11 @@ body {
     padding: 0;
 }
 
-.centered-heading {
+.text-center {
     text-align: center;
-    width: 100%;
 }
 
+/* Header */
 header {
     background-color: #111;
     color: #fff;
@@ -18,20 +19,23 @@ header {
     padding: 20px;
 }
 
+/* Messages d'erreur */
 .error-message {
     color: red;
 }
 
+/* Titres */
 h1 {
     text-align: center;
     margin-top: 0;
 }
 
-.container {
+/* Conteneurs */
+.container, .container2, .container3, .container4, .tab-sorties {
     max-width: 1000px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #333333;
+    background-color: #555; /* Couleur générique pour les conteneurs */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     text-align: center;
@@ -39,55 +43,22 @@ h1 {
     justify-content: center;
 }
 
-.container2 {
-    max-width: 1000px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #555;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    border-radius: 5px;
-    text-align: center;
-    justify-content: center;
+.container {
+    background-color: #333; /* Couleur spécifique pour container */
 }
 
 .container3 {
-    max-width: 500px;
-    margin: 20px auto;
-    padding: 20px;
     background-color: #333;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    border-radius: 5px;
-    text-align: center;
-    justify-content: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 
-.container4 {
-    max-width: 1000px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #555;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    border-radius: 5px;
-    text-align: center;
-    justify-content: center;
-}
-
-p {
-    margin: 0;
-}
-
+/* Tableaux */
 table {
     width: 100%;
     border-collapse: collapse;
 }
-
-/* table, th, td {
-    border: 1px solid #200;
-} */
 
 th, td {
     padding: 10px;
@@ -98,33 +69,44 @@ th {
     background-color: #111;
 }
 
+/* Texte visible */
 .texte-visible {
     color: #ffffff; /* Couleur du texte (blanc dans cet exemple) */
-    text-shadow: none; /* Supprimez l'ombre de texte précédente */
-    font-weight: bold; /* Rend le texte en gras pour le faire ressortir */
-    text-align: center; /* Centre le texte horizontalement dans la cellule */
-    border: 1px solid #000; /* Ajoute un contour autour du texte */
-    padding: 5px; /* Ajoute un espacement autour du texte */
-  }
+    font-weight: bold; /* Texte en gras */
+    text-align: center;
+    border: 1px solid #000; /* Contour autour du texte */
+    padding: 5px;
+}
 
-button {
+/* Boutons */
+.button, a.button-link {
     background-color: #007BFF;
     color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-}
-
-a {
     text-decoration: none;
-    color: #007BFF;
+    font-weight: bold;
+    font-size: 18px;
 }
 
-a:hover {
-    text-decoration: underline;
+a.button-link {
+    display: block;
+    width: 30%;
+    text-align: center;
+    padding: 15px 0;
+    background-color: #222;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    margin: 10px;
 }
 
+a.button-link:hover {
+    background-color: #424547;
+}
+
+/* Couleurs des lignes */
 .ligne-or {
     background-color: #949434; /* Jaune mat */
 }
@@ -137,6 +119,7 @@ a:hover {
     background-color: #8a541f; /* Bronze */
 }
 
+/* En-tête de navigation */
 .header {
     display: flex;
     justify-content: center;
@@ -161,54 +144,6 @@ a:hover {
     display: block;
 }
 
-.button {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    padding: 15px;
-    display: block;
-}
-
 .nav-box:hover {
     background-color: #555;
-}
-
-.big-button {
-    margin-top: 10px;
-    font-size: 16px; /* Ajustez la taille de police selon vos préférences */
-    padding: 10px 20px; /* Ajustez la marge intérieure pour contrôler la taille du bouton */
-}
-
-/* Ajoutez ces styles CSS pour rendre l'ensemble du bouton cliquable */
-.button-link {
-    display: block; /* Convertit le lien en un élément de type bloc */
-    width: 30%;    /* Largeur du bouton (peut être ajustée selon vos préférences) */
-    text-align: center; /* Centre le texte horizontalement dans le bouton */
-    padding: 15px 0; /* Ajoutez un espacement intérieur pour le style et centre le texte verticalement */
-    text-decoration: none; /* Supprime la décoration de lien par défaut */
-    color: #fff; /* Couleur du texte */
-    background-color: #222; /* Couleur d'arrière-plan du bouton (peut être personnalisée) */
-    border-radius: 20px; /* Ajoutez des coins arrondis au bouton si nécessaire */
-    transition: background-color 0.3s ease; /* Ajoutez une transition fluide au changement de couleur au survol */
-    margin: 10px; /* Espacement entre les boutons */
-}
-
-
-.button-link:hover {
-    background-color: #424547; /* Couleur d'arrière-plan au survol (peut être personnalisée) */
-}
-
-.tab-sorties {
-    max-width: 1000px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #316965;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    border-radius: 5px;
-    text-align: center;
-    display: flex;
-    justify-content: space-around;
-    align-items: center
-    
 }

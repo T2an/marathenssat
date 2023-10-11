@@ -9,9 +9,9 @@ if (!isset($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connect
 }
 
 // Récupérez les données soumises depuis le formulaire
-$km = $_POST['km'];
-$nom = $_POST['nom'];
-$date = $_POST['date']; // Récupération de la date
+$km = htmlspecialchars($_POST['km'], ENT_QUOTES, 'UTF-8');
+$nom = htmlspecialchars($_POST['nom'], ENT_QUOTES, 'UTF-8');
+$date = htmlspecialchars($_POST['date'], ENT_QUOTES, 'UTF-8'); // Récupération de la date
 
 // Générez automatiquement des codes de course et de compensation aléatoires
 $code_course = genererCodeAleatoire(5);
@@ -33,18 +33,18 @@ function genererCodeAleatoire($longueur) {
 // Vérifiez si un fichier a été téléchargé
 if (isset($_FILES['image'])) {
     $file = $_FILES['image'];
-    
+
     // Vérifiez s'il n'y a pas d'erreur lors du téléchargement
     if ($file['error'] === UPLOAD_ERR_OK) {
         // Obtenez le nom temporaire du fichier
         $tempName = $file['tmp_name'];
-        
+
         // Générez un nom unique pour le fichier
         $fileName = 'images/' . uniqid() . '.png';
-        
+
         // Déplacez le fichier temporaire vers le dossier "images"
         move_uploaded_file($tempName, $fileName);
-        
+
         // Préparez la requête SQL pour insérer la sortie dans la table "sorties" avec le nom du fichier
         $sql_insert_sortie = "INSERT INTO sorties (km, nom, code_course, code_compense, date, image) VALUES (?, ?, ?, ?, ?, ?)";
 
