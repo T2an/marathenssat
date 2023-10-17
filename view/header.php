@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('../model/config.php');
 
 $nom_utilisateur = $prenom_utilisateur = '';

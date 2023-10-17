@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +27,6 @@
 <body>
 
 <?php
-session_start();
 include('../model/config.php');
 
 // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion

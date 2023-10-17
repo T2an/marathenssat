@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +14,7 @@
 
         <!-- Affichez le message d'erreur s'il existe -->
         <?php
-        session_start();
+        
         if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {
             echo '<p class="error-message">' . htmlspecialchars($_SESSION['message'], ENT_QUOTES, 'UTF-8') . '</p>';
             unset($_SESSION['message']); // Supprimez la variable de session après l'affichage

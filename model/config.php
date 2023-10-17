@@ -12,14 +12,16 @@ if (file_exists($envFilePath)) {
         isset($envVariables['DB_HOST']) &&
         isset($envVariables['DB_USER']) &&
         isset($envVariables['DB_PASS']) &&
-        isset($envVariables['DB_NAME'])
+        isset($envVariables['DB_NAME']) &&
+        isset($envVariables['DB_PORT'])
     ) {
         $servername = $envVariables['DB_HOST'];
         $username = $envVariables['DB_USER'];
         $password = $envVariables['DB_PASS'];
         $dbname = $envVariables['DB_NAME'];
+        $dbport = $envVariables['DB_PORT'];
 
-        $conn = new mysqli($servername, $username, $password, $dbname);
+        $conn = new mysqli($servername, $username, $password, $dbname, $dbport);
 
         if ($conn->connect_error) {
             die("La connexion à la base de données a échoué : " . $conn->connect_error);
