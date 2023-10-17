@@ -68,7 +68,7 @@ $result_classement = $conn->query($sql_classement);
     </table>
 </div>
 
-<div class="container2">
+<div class="container3">
     <h3>Le classement est incrémenté de 1 pour chaque sortie réalisée avec le groupe.</h3>
     <h3>Si vous ratez une sortie, le compteur retombe à 0 !</h3>
 </div>

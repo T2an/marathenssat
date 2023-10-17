@@ -44,7 +44,7 @@ if ($stmt) {
 <div class="container2">
     <h2>Profil de l'utilisateur</h2>
 </div>
-<div class="container2">
+<div class="container-grid">
     <p>Nom : <?php echo htmlspecialchars($nom_utilisateur, ENT_QUOTES, 'UTF-8'); ?></p>
     <p>Prénom : <?php echo htmlspecialchars($prenom_utilisateur, ENT_QUOTES, 'UTF-8'); ?></p>
     <p>Email : <?php echo htmlspecialchars($email_utilisateur, ENT_QUOTES, 'UTF-8'); ?></p>

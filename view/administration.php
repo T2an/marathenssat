@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +11,6 @@
 <body>
 
 <?php
-session_start();
 
 // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
 if (!isset($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connecte']) {
@@ -52,17 +55,16 @@ if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {
 <h2>Panneau d'administration</h2>
 </div>
 
-<div class="container2">
+<div class="container-grid">
     <h3>Ajouter une sortie</h3>
     <form action="../controler/traitement_ajout_sortie.php" method="post" enctype="multipart/form-data">
-        <label for="km">Kilomètres :</label>
+        <label for="km">Kms :</label>
         <input type="text" name="km" required><br>
         <label for="nom">Nom :</label>
         <input type="text" name="nom" required><br>
         <label for="date">Date :</label>
         <input type="date" name="date" required><br>
         <!-- Ajoutez un champ d'envoi de fichier pour l'image -->
-        <label for="image">Image :</label>
         <input type="file" name="image" accept="image/*" required><br>
         <input type="submit" class="big-button" value="Ajouter">
     </form>
